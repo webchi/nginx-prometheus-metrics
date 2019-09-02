@@ -1,9 +1,7 @@
 FROM openresty/openresty:alpine
 
-MAINTAINER Sophos <hnlq.sysu@gmail.com>
+RUN rm /etc/nginx/conf.d/default.conf
 
-COPY nginx.conf         /usr/local/openresty/nginx/conf/
-COPY *.vhost            /usr/local/openresty/nginx/conf/
+COPY nginx.conf         /usr/local/openresty/nginx/conf/nginx.conf
+COPY metrics.conf       /etc/nginx/conf.d
 COPY lib/prometheus.lua /usr/local/openresty/luajit/lib
-
-RUN nginx -t
